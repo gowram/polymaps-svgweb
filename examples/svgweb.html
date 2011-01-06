@@ -30,7 +30,6 @@
 						map, container, tiles;
 				window.onsvgload = function() {
 					container = document.getElementById("map");
-					console.log(container);
 
 					map = po.map()
 						.container(container);
@@ -48,9 +47,23 @@
 					map.add(tiles);
 
 					var poly = po.geoJson()
+						.scale("fixed")
+						.zoom(12)
 						.on("load", po.stylist()
-								.attr("fill", "#f0f")
-								.attr("fill-opacity", .5))
+								.attr("cursor", "pointer")
+								.attr("fill", "#00f")
+								.attr("fill-opacity", .8))
+						/*
+						// TODO: make links work!
+						.on("load", function(e) {
+							e.features.forEach(function(f) {
+								var link = po.svg("a");
+								link.setAttributeNS(po.ns.xlink, "href", "http://polymaps.org");
+								f.element.parentNode.appendChild(link);
+								link.appendChild(f.element);
+							});
+						})
+						*/
 						.features([mission]);
 					map.add(poly);
 
@@ -58,6 +71,7 @@
 					// map.add(po.hash());
 
 					var box = container.appendChild(po.svg("rect"));
+					box.setAttribute("cursor", "pointer");
 					box.setAttribute("fill", "#f00");
 					box.setAttribute("x", 20);
 					box.setAttribute("y", 20);
