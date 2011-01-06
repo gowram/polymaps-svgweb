@@ -7,6 +7,16 @@
 		<meta name="svg.render.flashdebug" content="true"/>
     <style type="text/css">
 
+			html {
+				margin: 0;
+				padding: 0;
+			}
+
+			body {
+				padding: 0;
+				margin: 0;
+			}
+
     </style>
   </head>
   <body>
@@ -21,11 +31,6 @@
 				window.onsvgload = function() {
 					container = document.getElementById("map");
 					console.log(container);
-
-					var box = container.appendChild(po.svg("rect"));
-					box.setAttribute("width", 200);
-					box.setAttribute("height", 32);
-					box.setAttribute("fill", "#f00");
 
 					map = po.map()
 						.container(container);
@@ -52,6 +57,16 @@
 					map.add(po.interact());
 					// map.add(po.hash());
 
+					var box = container.appendChild(po.svg("rect"));
+					box.setAttribute("fill", "#f00");
+					box.setAttribute("x", 20);
+					box.setAttribute("y", 20);
+					box.setAttribute("width", 100);
+					box.setAttribute("height", 100);
+					box.addEventListener("dblclick", function(e) {
+						console.log("DOUBLE CLICK!");
+						console.log(e);
+					});
 				};
 
 			</script>
